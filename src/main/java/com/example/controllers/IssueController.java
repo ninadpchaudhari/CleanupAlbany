@@ -64,14 +64,6 @@ public class IssueController {
 		
 	}
 	
-	@GetMapping(value="/testNotification")
-	@ResponseBody
-	public String testNotification() {
-		PersonalDevice pd = regService.findById("13");
-		
-		NotificationService.send(pd.getFcmtoken(), "25");
-		return "lol";
-	}
 	
 	//@PostMapping(value="/accept")
 	//public Issue acceptJob()
