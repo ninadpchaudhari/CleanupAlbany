@@ -23,7 +23,7 @@ public class QuickstartSample {
 		try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
 			Path resourceDirectory = Paths.get("src/main/webapp/resources");
 			// The path to the image file to annotate
-			String fileName = resourceDirectory.toAbsolutePath().toString() + '/' + "issue_6" + ".png";
+			String fileName = resourceDirectory.toAbsolutePath().toString() + '/' + "issue_5" + ".png";
 
 			// Reads the image file into memory
 			Path path = Paths.get(fileName);
