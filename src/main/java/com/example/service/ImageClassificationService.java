@@ -10,7 +10,7 @@ import com.exmaple.misc.GoogleVision;
 public class ImageClassificationService {
 
 	public boolean isSnow(long issueId) {
-		HashMap<String, String> descScore = null;
+		HashMap<String, Float> descScore = null;
 		try {
 			descScore = GoogleVision.getImageContent(issueId);
 			System.out.println(descScore.toString());
@@ -20,7 +20,7 @@ public class ImageClassificationService {
 		}
 		
 		if(descScore != null && descScore.containsKey("snow")) {
-			if(Long.parseLong(descScore.get("snow")) >= 0.6) {
+			if(descScore.get("snow") >= 0.6) {
 				System.out.println("Snow found");
 				return true;
 			}

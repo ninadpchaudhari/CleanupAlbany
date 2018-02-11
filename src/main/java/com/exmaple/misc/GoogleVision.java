@@ -56,8 +56,8 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GoogleVision {
-	public static HashMap<String,String> getImageContent(long issueId) throws Exception {
-		HashMap<String,String> descriptionScore = new HashMap<String,String>();
+	public static HashMap<String,Float> getImageContent(long issueId) throws Exception {
+		HashMap<String,Float> descriptionScore = new HashMap<String,Float>();
 		// Instantiates a client
 		try (ImageAnnotatorClient vision = ImageAnnotatorClient.create()) {
 			Path resourceDirectory = Paths.get("src/main/webapp/resources");
@@ -88,12 +88,17 @@ public class GoogleVision {
 
 				for (EntityAnnotation annotation : res.getLabelAnnotationsList()) {
 					
-					annotation.getAllFields().forEach((k, v) -> descriptionScore.put(k.toString(), v.toString()));
+					String desc = annotation.getDescription();
+					Float score = annotation.getScore();
+					
+					descriptionScore.put(desc, score);
+					
 				}
 			}
 			return descriptionScore;
 		}
 		
 	}
+	
 	
 }
