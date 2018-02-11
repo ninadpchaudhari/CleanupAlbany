@@ -15,7 +15,7 @@ public class RegistrationService {
 	
 	public PersonalDevice registerDevice(String fcmtoken) {
 		PersonalDevice pd = new PersonalDevice(fcmtoken);
-		return personalRepo.save(pd);
+		return personalRepo.saveAndFlush(pd);
 	}
 	public PersonalDevice findByFcmtoken(String fcmtoken) {
 		return personalRepo.findByFcmtoken(fcmtoken);

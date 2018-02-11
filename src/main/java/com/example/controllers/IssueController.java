@@ -30,6 +30,7 @@ public class IssueController {
 	IssueService issueService;
 	@Autowired
 	NotificationService notifications;
+	@SuppressWarnings("unused")
 	@PostMapping(value="/issue")
 	@ResponseBody
 	public Map<String,String> uploadImage(
@@ -39,10 +40,13 @@ public class IssueController {
 			@RequestParam String lng) {
 		Map<String,String> myMap = new HashMap<String,String>();
 		PersonalDevice pd = regService.findByFcmtoken(fcmtoken);
+		
 		if(pd == null) {
 			//Device does not exist
 			pd = regService.registerDevice(fcmtoken);
+			System.out.println("Device does not exist, creating");
 		}
+		System.out.println("Request to add issue from : " + pd.getId());
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
 		if(i == null) {
 			//Not Snow/Grabage...
@@ -66,6 +70,9 @@ public class IssueController {
 		NotificationService.send(pd.getFcmtoken(), "25");
 		return "lol";
 	}
+	
+	//@PostMapping(value="/accept")
+	//public Issue acceptJob()
 	/*
 	 * 
 	 

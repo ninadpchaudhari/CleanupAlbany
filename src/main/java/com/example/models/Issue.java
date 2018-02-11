@@ -24,6 +24,11 @@ public class Issue {
 		this.lng = lng;
 		this.type = type;
 	}
+	public Issue(long creatorId, String lat,String lng) {
+		this.creator = creatorId;
+		this.lat = lat;
+		this.lng = lng;
+	}
 	public Issue() {
 		super();
 		// TODO Auto-generated constructor stub

@@ -27,17 +27,21 @@ public class IssueService {
 	TruckDeviceRepository truckRepo;
 	
 	public Issue saveIssue(long creatorId, String lat,String lng, MultipartFile image) {
-		
-		Issue i = new Issue(creatorId,Long.parseLong("0"),lat,lng,"");
-		issueRepo.save(i);
+		System.out.println("in issueSevice>saveIssue");
+		Issue i = new Issue(creatorId,lat,lng);
+		i = issueRepo.save(i);
+		System.out.println("Issue saved 1 : id: "+ i.getId());
 		if(storageService.saveImage(i.getId(), image)) {
 			String type = imgClassify.getContentInImage(i.getId());
 			
 			i.setType(type);
-			issueRepo.save(i);
+			
+			i = issueRepo.save(i);
+			System.out.println("saved issue with type");
 			return i;
 		}
 		else {
+			System.out.println("storageServce save Image gave false! ");
 			return null;
 		}
 	}
