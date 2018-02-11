@@ -1,11 +1,19 @@
 package com.example.service;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.net.ssl.HttpsURLConnection;
 
 import org.apache.http.entity.StringEntity;
 import org.apache.http.util.EntityUtils;
@@ -53,8 +61,8 @@ public class NotificationService {
 				restTemplate.setInterceptors(interceptors);
 				restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-				HttpEntity<String> request = new HttpEntity<String>(headers);
-
+				
+/*
 			   JSONObject msg = new JSONObject();
 			   
 			   JSONObject json = new JSONObject();
@@ -67,15 +75,49 @@ public class NotificationService {
 			  // json.put("to", fcmtoken);
 			   
 			   System.out.println(json.toString());
-			   
+			   HttpEntity<String> request = new HttpEntity<String>(headers,json);
 			   //HttpEntity<String> httpEntity = new HttpEntity<String>(json.toString(),headers);
 			   ResponseEntity<String> response = restTemplate.postForEntity(androidFcmUrl, request, String.class);
 			   //String response = restTemplate.postForObject(androidFcmUrl,httpEntity,String.class);
-			   System.out.println(response);
-			} catch (JSONException e) {
-			   e.printStackTrace();
-			   return false;
-			}
+			   System.out.println(response);*/
+				URL obj = new URL(androidFcmUrl);
+				HttpURLConnection  con = (HttpURLConnection)obj.openConnection();
+				con.setRequestMethod("POST");
+				//con.setRequestProperty("User-Agent", USER_AGENT);
+				con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+				con.setRequestProperty("Authorization", "key=AAAA68-dUKE:APA91bGs9xgjmLRdod-m9EeopxYEKoNUD67zHEBOraLU5qpSgghUHQRVL52D5FXi0YVjxOYSiKlPqSsVC9NkQgcxGQAfO2eJ-Ft_0qaH19b2G_ydrUb9U-Qq5R-ecagxgnqLY1O6FRqf");
+				
+				String urlParameters = "{ \"data\":{ \"title\" : \"Issu Hi rgregergeTher eId\", \"detail\" : \" " + issueId+"\" }, \"to\": \" " + fcmtoken+ "\"}";
+				
+				// Send post request
+				con.setDoOutput(true);
+				DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+				wr.writeBytes(urlParameters);
+				wr.flush();
+				wr.close();
+
+				int responseCode = con.getResponseCode();
+				System.out.println("\nSending 'POST' request to URL : " + androidFcmUrl);
+				System.out.println("Post parameters : " + urlParameters);
+				System.out.println("Response Code : " + responseCode);
+
+				BufferedReader in = new BufferedReader(
+				        new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				StringBuffer response = new StringBuffer();
+
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
+				in.close();
+
+				//print result
+				System.out.println(response.toString());
+		
+			} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return true;
 	}
 }
