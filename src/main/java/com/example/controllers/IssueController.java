@@ -39,12 +39,14 @@ public class IssueController {
 			pd = regService.registerDevice(fcmtoken);
 		}
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
+		if(i == null) {
+			//Not Snow/Grabage...
+			return new Issue();
+		}
+		if(i.getType().equals("snow") || i.getType().equals("garbage")) {
+			issueService.assignTruck(i.getId());
+		}
 		return i;
-	}
-	@GetMapping(value="/testDist")
-	public String testDistance() {
-		GoogleDistanceApi.estimateRoute();
-		return "lol";
 	}
 	
 	@PostMapping(value="/issueTest")

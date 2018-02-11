@@ -1,5 +1,7 @@
 package com.example.repos;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.example.models.PersonalDevice;
@@ -10,4 +12,5 @@ public interface TruckDeviceRepository extends JpaRepository<TruckDevice, Long> 
 
 	public TruckDevice findById(long id);
 	public TruckDevice findByVehicleId(long vehicleId);
+	public List<TruckDevice> findByType(String type);
 }

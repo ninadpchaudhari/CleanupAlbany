@@ -10,7 +10,10 @@ import com.google.maps.DistanceMatrixApiRequest;
 import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
+import com.google.maps.model.Distance;
 import com.google.maps.model.DistanceMatrix;
+import com.google.maps.model.DistanceMatrixElement;
+import com.google.maps.model.DistanceMatrixRow;
 import com.google.maps.model.GeocodingResult;
 import com.google.maps.model.LatLng;
 import com.google.maps.model.TravelMode;
@@ -18,7 +21,9 @@ import com.google.maps.model.TravelMode;
 public class GoogleDistanceApi {
 	
 		//DistanceMatrixApiRequest req = DistanceMatrixApi.getDistanceMatrix(context,new String[] {"",""}, new String[] {"",""});
-		public static DistanceMatrix estimateRoute() {
+		public static int getTruckOverMinDistance(LatLng[] origins,LatLng destination ) {
+			Distance dist = null;
+			int index = 0;
 			GeoApiContext context = new GeoApiContext.Builder()
 				    .apiKey("AIzaSyDXxCOHRlN_oeRyLNl78i51IoanE_mF5Gk")
 				    .build();
@@ -30,20 +35,34 @@ public class GoogleDistanceApi {
 		        
 		            DirectionsApi.RouteRestriction routeRestriction = DirectionsApi.RouteRestriction.TOLLS;
 		        
-		        DistanceMatrix trix = req.origins(new LatLng(Double.parseDouble("42.82653400"),Double.parseDouble("-73.92746900")))
-		                .destinations(new LatLng(Double.parseDouble("42.8148897"),Double.parseDouble("-73.950099")))
+		        DistanceMatrix trix = 
+		        		req.origins(origins)
+		                .destinations(destination)
 		                .mode(TravelMode.DRIVING)
 		                .avoid(routeRestriction)
 		                .await();
-		       System.out.println(trix.toString());
-		        return trix;
+		        int itr = 0;
+		        for(DistanceMatrixRow element:trix.rows) {
+		        	for (DistanceMatrixElement e:element.elements) {
+		        		if(dist == null || e.distance.inMeters < dist.inMeters ) {
+		        			dist = e.distance;
+		        			System.out.println(dist.inMeters);
+		        			index = itr;
+		        		}
+		        		//return dist;
+		        		
+		        	}
+		        	itr++;
+		        }
+		      
+		        return index;
 
 		    } catch (ApiException e) {
 		        System.out.println(e.getMessage());
 		    } catch (Exception e) {
 		        System.out.println(e.getMessage());
 		    }
-		    return null;
+		    return 0;
 		
 		}
 
