@@ -15,6 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.models.Issue;
 import com.example.models.PersonalDevice;
+import com.example.repos.IssueRepository;
+import com.example.repos.PersonalDeviceRepository;
 import com.example.service.IssueService;
 import com.example.service.NotificationService;
 import com.example.service.RegistrationService;
@@ -31,6 +33,10 @@ public class IssueController {
 	@Autowired
 	NotificationService notifications;
 
+	@Autowired
+	PersonalDeviceRepository personalRepo;
+	@Autowired
+	IssueRepository issueRepo;
 	@SuppressWarnings("unused")
 	@PostMapping(value="/issue")
 	@ResponseBody
@@ -66,14 +72,21 @@ public class IssueController {
 	}
 	
 	
-	
-	
-	//@PostMapping(value="/accept")
-	//public Map<String,String> acceptJob(@RequestParam String id,
-	//		@RequestParam String issueid) {
+	@PostMapping(value="/accept")
+	public Map<String,String> acceptJob(@RequestParam String id,
+			@RequestParam String issueId) {
+		Map<String,String> myMap = new HashMap<String,String>();
+		
 		//send notification to user that it has been acceprd
-		//notifications.send(fcmtoken, issueId);
-	//}
+		Issue i = issueRepo.findById(Long.parseLong(issueId));
+		long creator = i.getCreator();
+		
+		PersonalDevice pd = personalRepo.findById(creator);
+		
+		notifications.sendThanks(pd.getFcmtoken());
+		myMap.put("status", "ok");
+		return myMap;
+	}
 	
 	/*
 	@PostMapping(value="/issueTest")
