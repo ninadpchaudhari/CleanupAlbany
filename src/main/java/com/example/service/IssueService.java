@@ -49,7 +49,7 @@ public class IssueService {
 	
 	public Issue assignTruck(long issueId) {
 		Issue issue = issueRepo.findById(issueId);
-		List<TruckDevice> trucks = truckRepo.findByTypeAndBusyAndFcmtokenNotNull(issue.getType(),false);
+		List<TruckDevice> trucks = truckRepo.findByTypeAndBusyAndFcmtokenNotNull(issue.getType(),0);
 		if(trucks == null) {
 			System.err.println("NO TRUCKS LOGGED IN!!");
 			return new Issue((long)0,String.valueOf("0"),String.valueOf("0"));
@@ -63,7 +63,7 @@ public class IssueService {
 		int truckId = GoogleDistanceApi.getTruckOverMinDistance(origins, destination);
 		issue.setTruckAssigned((long)trucks.get(truckId).getId());
 		TruckDevice td = trucks.get(truckId);
-		td.setBusy(true);
+		td.setBusy(1);
 		td=truckRepo.save(td);
 		System.out.println("before notification");
 		System.out.println(td.getFcmtoken() + String.valueOf(issueId));

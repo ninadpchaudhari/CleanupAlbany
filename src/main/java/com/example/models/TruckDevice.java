@@ -16,9 +16,9 @@ public class TruckDevice {
 	String lat;
 	String lng;
 	String fcmtoken;
-	boolean busy;
+	int busy; // 0> free, 1>busy
 	
-	public TruckDevice( long vehicleId,String type, String lat, String lng,String fcmtoken,boolean busy) {
+	public TruckDevice( long vehicleId,String type, String lat, String lng,String fcmtoken,int busy) {
 		super();
 		this.vehicleId = vehicleId;
 		this.type = type;
@@ -75,10 +75,10 @@ public class TruckDevice {
 	public void setFcmtoken(String fcmtoken) {
 		this.fcmtoken = fcmtoken;
 	}
-	public boolean isBusy() {
+	public int isBusy() {
 		return busy;
 	}
-	public void setBusy(boolean busy) {
+	public void setBusy(int busy) {
 		this.busy = busy;
 	}
 	

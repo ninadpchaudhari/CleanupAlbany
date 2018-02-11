@@ -1,6 +1,7 @@
 package com.example.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.models.Issue;
 import com.example.models.PersonalDevice;
+import com.example.models.TruckDevice;
 import com.example.repos.IssueRepository;
 import com.example.repos.PersonalDeviceRepository;
+import com.example.repos.TruckDeviceRepository;
 import com.example.service.IssueService;
 import com.example.service.NotificationService;
 import com.example.service.RegistrationService;
@@ -37,6 +40,10 @@ public class IssueController {
 	PersonalDeviceRepository personalRepo;
 	@Autowired
 	IssueRepository issueRepo;
+	
+	@Autowired
+	TruckDeviceRepository truckRepo;
+	
 	@SuppressWarnings("unused")
 	@PostMapping(value="/issue")
 	@ResponseBody
@@ -54,11 +61,18 @@ public class IssueController {
 			System.out.println("Device does not exist, creating");
 		}
 		System.out.println("Request to add issue from : " + pd.getId());
+		
+		List<TruckDevice> trucks = truckRepo.findByBusyAndFcmtokenNotNull(0);
+		if(trucks == null) {
+			System.err.println("NO TRUCKS LOGGED IN!!");
+			myMap.put("status", "error");
+			return myMap;
+		}
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
 		System.out.println("i after saveImage" + i.getId());
 		if(i == null) {
 			//Not Snow/Grabage...
-			myMap.put("status", "bad");
+			myMap.put("status", "error");
 			return myMap;
 		}
 		if(i.getType().equals("snow") || i.getType().equals("garbage")) {
