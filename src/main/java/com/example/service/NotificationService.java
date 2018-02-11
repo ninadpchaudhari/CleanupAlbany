@@ -17,7 +17,7 @@ public class NotificationService {
 
 	public static boolean send(String fcmtoken,String issueId) {
 		try {
-			   
+			   System.out.println("Got issueid in notification :" + issueId);
 			   String androidFcmUrl="https://fcm.googleapis.com/fcm/send";
 
 			   RestTemplate restTemplate = new RestTemplate();
