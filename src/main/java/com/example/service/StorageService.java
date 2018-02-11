@@ -18,7 +18,7 @@ public class StorageService {
 		try {
 			File newFile = new File(resourceDirectory.toAbsolutePath().toString());
 			newFile.mkdirs();
-			newFile = new File(resourceDirectory.toAbsolutePath().toString() + '/' + image.getOriginalFilename());
+			newFile = new File(resourceDirectory.toAbsolutePath().toString() + '/' + "issue_"+IssueId + ".png");
 			image.transferTo(newFile);
 		}catch(Exception e) {
 			e.printStackTrace();
