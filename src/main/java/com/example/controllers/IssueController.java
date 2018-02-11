@@ -65,7 +65,12 @@ public class IssueController {
 		List<TruckDevice> trucks = truckRepo.findByBusyAndFcmtokenNotNull(0);
 		
 		
-		if(trucks == null) {
+		if(trucks == null ) {
+			System.out.println("NO TRUCKS LOGGED IN!!");
+			myMap.put("status", "error");
+			return myMap;
+		}
+		if(trucks.size() == 0) {
 			System.out.println("NO TRUCKS LOGGED IN!!");
 			myMap.put("status", "error");
 			return myMap;

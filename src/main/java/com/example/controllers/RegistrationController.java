@@ -56,6 +56,7 @@ public class RegistrationController {
 		if(tf!=null) {
 			tf.setFcmtoken(fcmtoken);
 		}
+		tf.setBusy(0);
 		truckRepo.save(tf);
 		System.out.println("registered device " + tf.getId());
 		return tf;
