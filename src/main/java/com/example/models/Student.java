@@ -21,8 +21,6 @@ public class Student {
 	
 	@NotEmpty
 	private String lastName;
-	
-	private Date dob;
 
 	private String email;
 	/**
@@ -67,19 +65,6 @@ public class Student {
 		this.lastName = lastName;
 	}
 
-	/**
-	 * @return the dob
-	 */
-	public Date getDob() {
-		return dob;
-	}
-
-	/**
-	 * @param dob the dob to set
-	 */
-	public void setDob(Date dob) {
-		this.dob = dob;
-	}
 
 	/**
 	 * @return the email
@@ -102,11 +87,9 @@ public class Student {
 	 * @param dob
 	 * @param email
 	 */
-	public Student(long id, String firstName, String lastName, Date dob, String email) {
-		this.id = id;
+	public Student(String firstName, String lastName, String email) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.dob = dob;
 		this.email = email;
 	}
 

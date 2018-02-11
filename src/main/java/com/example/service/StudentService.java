@@ -18,6 +18,20 @@ public class StudentService {
 	@Autowired
 	StudentRepository studentRepo;
 	
+	/*
+	 * Creates a new Student
+	 */
+	public Student createStudent(String firstName, String lastName, String email) {
+		return new Student(firstName,lastName,email);
+		
+	}
+	/*
+	 * Saves the student to DB
+	 */
+	public Student saveStudent(Student st) {
+		return studentRepo.save(st);
+	}
+	
 	public Student findByEmail(String email) {
 		return studentRepo.findByEmail(email);
 	}
