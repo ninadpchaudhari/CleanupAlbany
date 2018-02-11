@@ -27,9 +27,9 @@ public class IssueController {
 	@ResponseBody
 	public Issue uploadRestaurantMenu(
 			@RequestParam("image") MultipartFile image,
-			@PathVariable String fcmtoken,
-			@PathVariable String lat,
-			@PathVariable String lng) {
+			@RequestParam String fcmtoken,
+			@RequestParam String lat,
+			@RequestParam String lng) {
 		
 		PersonalDevice pd = regService.findByFcmtoken(fcmtoken);
 		if(pd == null) {
