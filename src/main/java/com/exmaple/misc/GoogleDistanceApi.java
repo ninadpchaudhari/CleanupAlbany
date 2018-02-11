@@ -49,7 +49,7 @@ public class GoogleDistanceApi {
 		        			System.out.println(dist.inMeters);
 		        			index = itr;
 		        		}
-		        		System.out.println(e.distance.inMeters);
+		        		//System.out.println(e.distance.inMeters);
 		        		//return dist;
 		        		
 		        	}

@@ -19,4 +19,7 @@ public class RegistrationService {
 	public PersonalDevice findByFcmtoken(String fcmtoken) {
 		return personalRepo.findByFcmtoken(fcmtoken);
 	}
+	public PersonalDevice findById(String id) {
+		return personalRepo.findById(Long.parseLong(id));
+	}
 }

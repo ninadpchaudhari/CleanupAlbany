@@ -49,7 +49,7 @@ public class IssueService {
 		for(int i=0;i<trucks.size();i++) {
 			origins[i] = new LatLng(Double.parseDouble(trucks.get(i).getLat()),Double.parseDouble(trucks.get(i).getLng()));
 		}
-		System.out.println(origins[trucks.size()-1].lat);
+		
 		LatLng destination = new LatLng(Double.parseDouble(issue.getLat()),Double.parseDouble(issue.getLng()));
 		int truckId = GoogleDistanceApi.getTruckOverMinDistance(origins, destination);
 		issue.setTruckAssigned((long)trucks.get(truckId).getId());

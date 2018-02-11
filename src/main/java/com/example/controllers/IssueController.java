@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.models.Issue;
 import com.example.models.PersonalDevice;
 import com.example.service.IssueService;
+import com.example.service.NotificationService;
 import com.example.service.RegistrationService;
 import com.exmaple.misc.GoogleDistanceApi;
 
@@ -24,7 +25,8 @@ public class IssueController {
 	RegistrationService regService;
 	@Autowired
 	IssueService issueService;
-	
+	@Autowired
+	NotificationService notifications;
 	@PostMapping(value="/issue")
 	@ResponseBody
 	public Issue uploadImage(
@@ -49,6 +51,14 @@ public class IssueController {
 		return i;
 	}
 	
+	@GetMapping(value="/testNotification")
+	@ResponseBody
+	public String testNotification() {
+		PersonalDevice pd = regService.findById("11");
+		
+		NotificationService.send(pd.getFcmtoken(), "25");
+		return "lol";
+	}
 	@PostMapping(value="/issueTest")
 	@ResponseBody
 	public Issue uploadTestIssue(
