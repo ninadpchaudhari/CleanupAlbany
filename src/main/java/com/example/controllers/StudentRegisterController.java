@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.models.Student;
 import com.example.service.GPSDataService;
 import com.example.service.StudentService;
-import com.exmaple.misc.QuickstartSample;
+
 @Controller
 public class StudentRegisterController {
 	@Autowired
