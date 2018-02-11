@@ -2,6 +2,7 @@ package com.example.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,6 +14,7 @@ import com.example.models.Issue;
 import com.example.models.PersonalDevice;
 import com.example.service.IssueService;
 import com.example.service.RegistrationService;
+import com.exmaple.misc.GoogleDistanceApi;
 
 
 @RestController
@@ -38,6 +40,11 @@ public class IssueController {
 		}
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
 		return i;
+	}
+	@GetMapping(value="/testDist")
+	public String testDistance() {
+		GoogleDistanceApi.estimateRoute();
+		return "lol";
 	}
 	
 	@PostMapping(value="/issueTest")
