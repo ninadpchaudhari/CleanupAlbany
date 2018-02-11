@@ -55,6 +55,7 @@ public class IssueController {
 			return myMap;
 		}
 		if(i.getType().equals("snow") || i.getType().equals("garbage")) {
+			System.out.println("Before assignTruck");
 			issueService.assignTruck(i.getId());
 		}
 		

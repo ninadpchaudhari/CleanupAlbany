@@ -60,6 +60,7 @@ public class IssueService {
 		TruckDevice td = trucks.get(truckId);
 		td.setBusy(true);
 		truckRepo.save(td);
+		System.out.println("before notification");
 		NotificationService.send(td.getFcmtoken(), issueId + "");
 		return issueRepo.save(issue);
 		

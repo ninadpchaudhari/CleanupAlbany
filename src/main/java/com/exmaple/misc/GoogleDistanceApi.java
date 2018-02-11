@@ -46,7 +46,7 @@ public class GoogleDistanceApi {
 		        	for (DistanceMatrixElement e:element.elements) {
 		        		if(dist == null || e.distance.inMeters < dist.inMeters ) {
 		        			dist = e.distance;
-		        			System.out.println(dist.inMeters);
+		        			//System.out.println(dist.inMeters);
 		        			index = itr;
 		        		}
 		        		//System.out.println(e.distance.inMeters);
