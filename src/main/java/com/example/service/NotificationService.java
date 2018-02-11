@@ -53,7 +53,7 @@ public class NotificationService {
 				restTemplate.setInterceptors(interceptors);
 				restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
-				//HttpEntity<ObjectToPass> request = new HttpEntity<ObjectToPass>(objectToPassInstance, headers);
+				HttpEntity<String> request = new HttpEntity<String>(headers);
 
 			   JSONObject msg = new JSONObject();
 			   
@@ -68,8 +68,8 @@ public class NotificationService {
 			   
 			   System.out.println(json.toString());
 			   
-			   HttpEntity<String> httpEntity = new HttpEntity<String>(json.toString(),headers);
-			   ResponseEntity<String> response = restTemplate.postForEntity(androidFcmUrl, httpEntity, String.class);
+			   //HttpEntity<String> httpEntity = new HttpEntity<String>(json.toString(),headers);
+			   ResponseEntity<String> response = restTemplate.postForEntity(androidFcmUrl, request, String.class);
 			   //String response = restTemplate.postForObject(androidFcmUrl,httpEntity,String.class);
 			   System.out.println(response);
 			} catch (JSONException e) {
