@@ -16,7 +16,9 @@ public class StorageService {
 	public boolean saveImage(Long IssueId,MultipartFile image) {
 		Path resourceDirectory = Paths.get("src/main/webapp/resources/issue_"+IssueId.toString()+".png");
 		try {
-			image.transferTo(new File(resourceDirectory.toAbsolutePath().toString()));
+			File newFile = new File(resourceDirectory.toAbsolutePath().toString());
+			newFile.mkdirs();
+			image.transferTo(newFile);
 		}catch(Exception e) {
 			e.printStackTrace();
 			System.out.println("File write fail");
