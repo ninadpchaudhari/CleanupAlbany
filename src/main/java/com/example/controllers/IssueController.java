@@ -48,6 +48,7 @@ public class IssueController {
 		}
 		System.out.println("Request to add issue from : " + pd.getId());
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
+		System.out.println("i after saveImage" + i.getId());
 		if(i == null) {
 			//Not Snow/Grabage...
 			myMap.put("status", "bad");
