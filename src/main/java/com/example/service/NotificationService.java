@@ -81,7 +81,7 @@ public class NotificationService {
 			   //String response = restTemplate.postForObject(androidFcmUrl,httpEntity,String.class);
 			   System.out.println(response);*/
 				URL obj = new URL(androidFcmUrl);
-				HttpURLConnection  con = (HttpURLConnection)obj.openConnection();
+				HttpsURLConnection  con = (HttpsURLConnection)obj.openConnection();
 				con.setRequestMethod("POST");
 				//con.setRequestProperty("User-Agent", USER_AGENT);
 				con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
