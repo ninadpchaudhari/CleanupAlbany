@@ -43,7 +43,7 @@ public class IssueController {
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
 		if(i == null) {
 			//Not Snow/Grabage...
-			return new Issue();
+			return new Issue(0,0, "0", "0", "");
 		}
 		if(i.getType().equals("snow") || i.getType().equals("garbage")) {
 			issueService.assignTruck(i.getId());
@@ -54,7 +54,7 @@ public class IssueController {
 	@GetMapping(value="/testNotification")
 	@ResponseBody
 	public String testNotification() {
-		PersonalDevice pd = regService.findById("11");
+		PersonalDevice pd = regService.findById("13");
 		
 		NotificationService.send(pd.getFcmtoken(), "25");
 		return "lol";
