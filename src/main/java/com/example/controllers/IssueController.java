@@ -39,4 +39,17 @@ public class IssueController {
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
 		return i;
 	}
+	@PostMapping(value="/issueTest")
+	@ResponseBody
+	public Issue uploadTestIssue(
+			@RequestParam("file") MultipartFile image) {
+		String fcmtoken = "zzz";
+		PersonalDevice pd = regService.findByFcmtoken(fcmtoken);
+		if(pd == null) {
+			//Device does not exist
+			pd = regService.registerDevice(fcmtoken);
+		}
+		Issue i = issueService.saveIssue(pd.getId(), "nah", "nah", image);
+		return i;
+	}
 }

@@ -39,15 +39,5 @@ public class StudentRegisterController {
 		viewModel.addAttribute("ID","2");
 		return "index";
 	}
-	@GetMapping("/testVision")
-	public String testVision(@RequestParam Map<String,Object> model,Model viewModel) {
-		try {
-			QuickstartSample.trial();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		viewModel.addAttribute("ID","2");
-		return "index";
-	}
+	
 }
