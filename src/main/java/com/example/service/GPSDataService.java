@@ -24,19 +24,19 @@ public class GPSDataService {
 			Connection conn = connServer.dbConnect();
 		      Statement statement = conn.createStatement();
 		         String queryString = "select VehicleID,max(StartTime) as MaxStartTime FROM dbo.VehicleEvent where EventTypeID=1 GROUP BY VehicleID";
-		         System.out.println(queryString);
+		         //System.out.println(queryString);
 		         ResultSet rs = statement.executeQuery(queryString);
 		         HashMap <String,String> vehicleTime = new HashMap<String,String>();
 		         
 		         while (rs.next()) {
 		        	vehicleTime.put( rs.getString("VehicleID") , rs.getString("MaxStartTime"));
-		            System.out.println(rs.getString(1));
+		            //System.out.println(rs.getString(1));
 		         }
 		         Iterator<HashMap.Entry<String,String>> it = vehicleTime.entrySet().iterator();
 		         while(it.hasNext()) {
 		        	 HashMap.Entry<String, String> pair = it.next();
 		        	 queryString = "SELECT VehicleID,Latitude,Longitude,StartTime,Location from dbo.VehicleEvent where EventTypeID = 1 AND VehicleID= " +pair.getKey()+ " AND StartTime = '" + pair.getValue()+"'";
-		        	 System.out.println(queryString);
+		        	 //System.out.println(queryString);
 		        	 ResultSet rs2 = statement.executeQuery(queryString);
 		        	 while(rs2.next()) {
 		        		 String latitude = rs2.getString("Latitude");

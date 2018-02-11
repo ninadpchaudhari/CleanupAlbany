@@ -14,14 +14,14 @@ public class Issue {
 	long truckAssigned;
 	String lat;
 	String lng;
-	String timestamp;
-	public Issue(long creator, long truckAssigned, String lat, String lng, String timestamp) {
+	
+	public Issue(long creator, long truckAssigned, String lat, String lng) {
 		super();
 		this.creator = creator;
 		this.truckAssigned = truckAssigned;
 		this.lat = lat;
 		this.lng = lng;
-		this.timestamp = timestamp;
+		
 	}
 	public long getId() {
 		return id;
@@ -53,12 +53,7 @@ public class Issue {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
-	public String getTimestamp() {
-		return timestamp;
-	}
-	public void setTimestamp(String timestamp) {
-		this.timestamp = timestamp;
-	}
+	
 	
 	
 }
