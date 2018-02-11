@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.models.Student;
 import com.example.service.GPSDataService;
 import com.example.service.StudentService;
+import com.exmaple.misc.QuickstartSample;
 @Controller
 public class StudentRegisterController {
 	@Autowired
@@ -20,6 +21,8 @@ public class StudentRegisterController {
 	
 	@Autowired
 	GPSDataService gps;
+
+	
 	@RequestMapping(value="/hello", method=RequestMethod.GET)
 	//@PostMapping
 	public String renderFirstPage(@RequestParam Map<String,Object> model,Model viewModel) {
@@ -33,6 +36,17 @@ public class StudentRegisterController {
 	@GetMapping("/testMSSQL")
 	public String testSql(@RequestParam Map<String,Object> model,Model viewModel) {
 		gps.updateTruckLocations();
+		viewModel.addAttribute("ID","2");
+		return "index";
+	}
+	@GetMapping("/testVision")
+	public String testVision(@RequestParam Map<String,Object> model,Model viewModel) {
+		try {
+			QuickstartSample.trial();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		viewModel.addAttribute("ID","2");
 		return "index";
 	}
