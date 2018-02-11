@@ -1,0 +1,27 @@
+spring.mvc.view.prefix: /WEB-INF/jsp/
+spring.mvc.view.suffix: .jsp
+spring:
+  http:
+    multipart:
+      max-file-size: 1024KB
+      max-request-size: 1024KB
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update 
+  datasource:
+    url: jdbc:mysql://35.202.222.167:3306/cleanupalbany
+    username: springapp
+    password: springapp
+    platform: mysql
+    testWhileIdle: true
+    testOnBorrow: true
+    validationQuery: SELECT 1
+    properties:
+      hibernate:
+        use_sql_comments: true
+        format_sql: true
+  session:
+    store-type: jdbc
+server:
+  port: 80
