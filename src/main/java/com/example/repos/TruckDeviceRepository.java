@@ -12,5 +12,5 @@ public interface TruckDeviceRepository extends JpaRepository<TruckDevice, Long> 
 
 	public TruckDevice findById(long id);
 	public TruckDevice findByVehicleId(long vehicleId);
-	public List<TruckDevice> findByTypeAndBusy(String type,boolean busy);
+	public List<TruckDevice> findByTypeAndBusyAndFcmtokenNotNull(String type,boolean busy);
 }
