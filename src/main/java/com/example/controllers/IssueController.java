@@ -63,12 +63,14 @@ public class IssueController {
 		System.out.println("Request to add issue from : " + pd.getId());
 		
 		List<TruckDevice> trucks = truckRepo.findByBusyAndFcmtokenNotNull(0);
-		System.out.println("Found "+ trucks.size() +" Trucks");
+		
+		
 		if(trucks == null) {
 			System.out.println("NO TRUCKS LOGGED IN!!");
 			myMap.put("status", "error");
 			return myMap;
 		}
+		System.out.println("Found "+ trucks.size() +" Trucks");
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
 		System.out.println("i after saveImage" + i.getId());
 		if(i == null) {
