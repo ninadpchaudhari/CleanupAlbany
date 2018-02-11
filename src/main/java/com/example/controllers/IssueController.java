@@ -26,7 +26,7 @@ public class IssueController {
 	@PostMapping(value="/issue")
 	@ResponseBody
 	public Issue uploadRestaurantMenu(
-			@RequestParam("image") MultipartFile image,
+			@RequestParam("file") MultipartFile image,
 			@RequestParam String fcmtoken,
 			@RequestParam String lat,
 			@RequestParam String lng) {
