@@ -50,16 +50,12 @@ public class NotificationService {
         JSONObject notification = new JSONObject();
         try {
 			notification.put("body", "Body");
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-        try {
 			notification.put("title", "IssueId");
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+        
         // notification.put("icon", "myicon");
 
         JSONObject data = new JSONObject();
