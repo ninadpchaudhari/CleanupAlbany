@@ -28,7 +28,7 @@ public class NotificationService {
 			   JSONObject json = new JSONObject();
 
 			   msg.put("title", "Issue");
-			   msg.put("body", issueId);
+			   msg.put("detail", issueId);
 			   //msg.put("notificationType", "Test");
 
 			   json.put("data", msg);
