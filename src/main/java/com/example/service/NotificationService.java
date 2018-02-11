@@ -28,6 +28,7 @@ public class NotificationService {
     
     public ResponseEntity<String> sendToTruck(String fcmtoken,String issueId,LatLng latlng) {
 
+    	System.out.println("SENDING TO TOKEN:" + fcmtoken);
 
         JSONObject body = new JSONObject();
         // JsonArray registration_ids = new JsonArray();
