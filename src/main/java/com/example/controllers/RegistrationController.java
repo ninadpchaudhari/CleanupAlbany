@@ -57,7 +57,7 @@ public class RegistrationController {
 			tf.setFcmtoken(fcmtoken);
 		}
 		truckRepo.save(tf);
-		System.out.println("registered device ");
+		System.out.println("registered device " + tf.getId());
 		return tf;
 	}
 	

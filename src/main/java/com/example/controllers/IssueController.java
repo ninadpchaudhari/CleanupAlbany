@@ -30,6 +30,7 @@ public class IssueController {
 	IssueService issueService;
 	@Autowired
 	NotificationService notifications;
+
 	@SuppressWarnings("unused")
 	@PostMapping(value="/issue")
 	@ResponseBody
@@ -65,11 +66,16 @@ public class IssueController {
 	}
 	
 	
+	
+	
 	//@PostMapping(value="/accept")
-	//public Issue acceptJob()
+	//public Map<String,String> acceptJob(@RequestParam String id,
+	//		@RequestParam String issueid) {
+		//send notification to user that it has been acceprd
+		//notifications.send(fcmtoken, issueId);
+	//}
+	
 	/*
-	 * 
-	 
 	@PostMapping(value="/issueTest")
 	@ResponseBody
 	public Issue uploadTestIssue(

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.webapp.notifications.AndroidPushNotificationsService;
 import com.example.webapp.notifications.FirebaseResponse;
+import com.google.maps.model.LatLng;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -25,7 +26,7 @@ public class NotificationService {
     AndroidPushNotificationsService androidPushNotificationsService;
 
     
-    public ResponseEntity<String> send(String fcmtoken,String issueId) {
+    public ResponseEntity<String> sendToTruck(String fcmtoken,String issueId,LatLng latlng) {
 
 
         JSONObject body = new JSONObject();
@@ -63,6 +64,8 @@ public class NotificationService {
         JSONObject data = new JSONObject();
         try {
 			data.put("issueId", issueId);
+			data.put("lat", latlng.lat);
+			data.put("lng", latlng.lng);
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

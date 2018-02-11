@@ -67,7 +67,7 @@ public class IssueService {
 		td=truckRepo.save(td);
 		System.out.println("before notification");
 		System.out.println(td.getFcmtoken() + String.valueOf(issueId));
-		notification.send(td.getFcmtoken(), String.valueOf(issueId));
+		notification.sendToTruck(td.getFcmtoken(), String.valueOf(issueId),new LatLng(Double.parseDouble(issue.getLat()),Double.parseDouble(issue.getLng())));
 		//NotificationService.send(td.getFcmtoken(), issueId + "");
 		issue = issueRepo.save(issue);
 		return issue;
