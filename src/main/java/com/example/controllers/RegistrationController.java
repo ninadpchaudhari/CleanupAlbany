@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.models.Student;
+import com.example.service.RegistrationService;
 import com.example.service.StudentService;
 
 
@@ -25,6 +26,9 @@ public class RegistrationController {
 	
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	RegistrationService regService;
 
 	@RequestMapping(value="/hello", method=RequestMethod.GET)
 	//@PostMapping
@@ -39,8 +43,10 @@ public class RegistrationController {
 	@PostMapping(value="/registerPersonDevice")
 	@ResponseBody
 	public ResponseEntity<?> updateRestaurantProfile(@RequestParam Map<String, Object> model, ModelMap otherModel){
-		
-		//return ResponseEntity.badRequest().build();
+		System.out.println("Got a hit on register personal device");
+		String fcmtoken  = (String) model.get("fcmtoken");
+		if(regService.registerDevice(fcmtoken) == null) return ResponseEntity.badRequest().build();
+		System.out.println("registered device ");
 		return ResponseEntity.accepted().build();
 	}
 }
