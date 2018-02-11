@@ -40,4 +40,19 @@ public class RegistrationController {
 		System.out.println("registered device ");
 		return pd;
 	}
+	
+	/*
+	 * https://stackoverflow.com/questions/30558784/spring-rest-controller-return-specific-fields
+	 * @ResponseBody
+	public Map<String, Object> getGame(@PathVariable("id") long id, String include) {
+
+    Game game = service.loadGame(id);
+    // check the `include` parameter and create a map containing only the required attributes
+    Map<String, Object> gameMap = service.convertGameToMap(game, include);
+
+    return gameMap;
+
+}
+	 */
+	 
 }
