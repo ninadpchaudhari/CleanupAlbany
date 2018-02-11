@@ -91,8 +91,9 @@ public class GoogleVision {
 					annotation.getAllFields().forEach((k, v) -> descriptionScore.put(k.toString(), v.toString()));
 				}
 			}
+			return descriptionScore;
 		}
-		return descriptionScore;
+		
 	}
 	
 }
