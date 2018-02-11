@@ -9,7 +9,7 @@ import com.exmaple.misc.GoogleVision;
 @Service
 public class ImageClassificationService {
 
-	public boolean isSnow(long issueId) {
+	public String getContentInImage(long issueId) {
 		HashMap<String, Float> descScore = null;
 		try {
 			descScore = GoogleVision.getImageContent(issueId);
@@ -22,15 +22,22 @@ public class ImageClassificationService {
 		if(descScore != null && descScore.containsKey("snow")) {
 			if(descScore.get("snow") >= 0.6) {
 				System.out.println("Snow found");
-				return true;
+				return "snow";
 			}
 			System.out.println("Snow found but low confidence");
 			
 		}
+		else if(descScore != null && descScore.containsKey("garbage")) {
+			if(descScore.get("garbage") >=0.6) {
+				System.out.println("Garbage Found");
+				return "garbage";
+			}
+			System.out.println("Garbage found but low confidence");
+			
+		}
 		
-		
-			System.out.println("Snow not found!");
-			return false;
+			System.out.println("Snow/Garbage not found!");
+			return null;
 		
 	}
 }

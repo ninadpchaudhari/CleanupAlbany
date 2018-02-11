@@ -22,10 +22,11 @@ public class IssueService {
 		Issue i = new Issue(creatorId,Long.parseLong("0"),lat,lng,"");
 		issueRepo.save(i);
 		if(storageService.saveImage(i.getId(), image)) {
-			if(imgClassify.isSnow(i.getId())) {
-				i.setType("snow");
-				issueRepo.save(i);
-			} 
+			String type = imgClassify.getContentInImage(i.getId());
+			
+			i.setType(type);
+			issueRepo.save(i);
+			
 			return i;
 		}
 		else {
