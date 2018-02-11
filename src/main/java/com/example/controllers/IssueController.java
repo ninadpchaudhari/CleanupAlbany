@@ -25,7 +25,7 @@ public class IssueController {
 	
 	@PostMapping(value="/issue")
 	@ResponseBody
-	public Issue uploadRestaurantMenu(
+	public Issue uploadImage(
 			@RequestParam("file") MultipartFile image,
 			@RequestParam String fcmtoken,
 			@RequestParam String lat,
@@ -39,6 +39,7 @@ public class IssueController {
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
 		return i;
 	}
+	
 	@PostMapping(value="/issueTest")
 	@ResponseBody
 	public Issue uploadTestIssue(
