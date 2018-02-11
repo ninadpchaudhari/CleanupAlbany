@@ -13,6 +13,7 @@ public class ImageClassificationService {
 		HashMap<String, String> descScore = null;
 		try {
 			descScore = GoogleVision.getImageContent(issueId);
+			System.out.println(descScore.toString());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
