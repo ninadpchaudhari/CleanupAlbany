@@ -1,6 +1,7 @@
 package com.example.service;
 
 import org.springframework.stereotype.Service;
+import org.json.JSONException;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,21 +31,56 @@ public class NotificationService {
         JSONObject body = new JSONObject();
         // JsonArray registration_ids = new JsonArray();
         // body.put("registration_ids", registration_ids);
-        body.put("to", fcmtoken);
-        body.put("priority", "high");
+        try {
+			body.put("to", fcmtoken);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        try {
+			body.put("priority", "high");
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         // body.put("dry_run", true);
 
         JSONObject notification = new JSONObject();
-        notification.put("body", "Body");
-        notification.put("title", "IssueId");
+        try {
+			notification.put("body", "Body");
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        try {
+			notification.put("title", "IssueId");
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         // notification.put("icon", "myicon");
 
         JSONObject data = new JSONObject();
-        data.put("issueId", issueId);
+        try {
+			data.put("issueId", issueId);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         //data.put("key2", "value2");
 
-        body.put("notification", notification);
-        body.put("data", data);
+        try {
+			body.put("notification", notification);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+        try {
+			body.put("data", data);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
         HttpEntity<String> request = new HttpEntity<>(body.toString());
 
@@ -68,4 +104,4 @@ public class NotificationService {
         return new ResponseEntity<>("the push notification cannot be send.", HttpStatus.BAD_REQUEST);
     }
 }
-}
+
