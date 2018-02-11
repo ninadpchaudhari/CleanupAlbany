@@ -40,12 +40,12 @@ public class NotificationService {
 		try {
 			   System.out.println("Got issueid in notification :" + issueId);
 			   String androidFcmUrl= "https://fcm.googleapis.com/fcm/send";
-			   try {
-				   androidFcmUrl = URLEncoder.encode(androidFcmUrl,"UTF-8");
+			   /*try {
+				   //androidFcmUrl = URLEncoder.encode(androidFcmUrl,"UTF-8");
 				} catch (UnsupportedEncodingException e) {
 					System.out.println("/search POST Failed encode search string");
 					e.printStackTrace();
-				}
+				}*/
 			   
 			   
 
