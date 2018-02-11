@@ -1,5 +1,8 @@
 package com.example.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,12 +32,12 @@ public class IssueController {
 	NotificationService notifications;
 	@PostMapping(value="/issue")
 	@ResponseBody
-	public Issue uploadImage(
+	public Map<String,String> uploadImage(
 			@RequestParam("file") MultipartFile image,
 			@RequestParam String fcmtoken,
 			@RequestParam String lat,
 			@RequestParam String lng) {
-		
+		Map<String,String> myMap = new HashMap<String,String>();
 		PersonalDevice pd = regService.findByFcmtoken(fcmtoken);
 		if(pd == null) {
 			//Device does not exist
@@ -43,12 +46,16 @@ public class IssueController {
 		Issue i = issueService.saveIssue(pd.getId(), lat, lng, image);
 		if(i == null) {
 			//Not Snow/Grabage...
-			return new Issue(0,0, "0", "0", "");
+			myMap.put("status", "bad");
+			return myMap;
 		}
 		if(i.getType().equals("snow") || i.getType().equals("garbage")) {
 			issueService.assignTruck(i.getId());
 		}
-		return i;
+		
+		myMap.put("status", "ok");
+		return myMap;
+		
 	}
 	
 	@GetMapping(value="/testNotification")
