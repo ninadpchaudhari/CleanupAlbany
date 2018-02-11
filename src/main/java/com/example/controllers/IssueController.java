@@ -63,8 +63,9 @@ public class IssueController {
 		System.out.println("Request to add issue from : " + pd.getId());
 		
 		List<TruckDevice> trucks = truckRepo.findByBusyAndFcmtokenNotNull(0);
+		System.out.println("Found "+ trucks.size() +" Trucks");
 		if(trucks == null) {
-			System.err.println("NO TRUCKS LOGGED IN!!");
+			System.out.println("NO TRUCKS LOGGED IN!!");
 			myMap.put("status", "error");
 			return myMap;
 		}
