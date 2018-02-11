@@ -22,7 +22,8 @@ public class IssueService {
 	StorageService storageService;
 	@Autowired
 	ImageClassificationService imgClassify;
-	
+	@Autowired
+	NotificationService notification;
 	@Autowired
 	TruckDeviceRepository truckRepo;
 	
@@ -61,7 +62,8 @@ public class IssueService {
 		td.setBusy(true);
 		truckRepo.save(td);
 		System.out.println("before notification");
-		NotificationService.send(td.getFcmtoken(), issueId + "");
+		notification.send(td.getFcmtoken(), String.valueOf(issueId));
+		//NotificationService.send(td.getFcmtoken(), issueId + "");
 		return issueRepo.save(issue);
 		
 		
