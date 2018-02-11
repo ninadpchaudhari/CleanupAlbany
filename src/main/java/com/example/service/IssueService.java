@@ -14,10 +14,18 @@ public class IssueService {
 	IssueRepository issueRepo;
 	@Autowired
 	StorageService storageService;
+	@Autowired
+	ImageClassificationService imgClassify;
+	
 	public Issue saveIssue(long creatorId, String lat,String lng, MultipartFile image) {
-		Issue i = new Issue(creatorId,Long.parseLong("0"),lat,lng);
+		
+		Issue i = new Issue(creatorId,Long.parseLong("0"),lat,lng,"");
 		issueRepo.save(i);
 		if(storageService.saveImage(i.getId(), image)) {
+			if(imgClassify.isSnow(i.getId())) {
+				i.setType("snow");
+				issueRepo.save(i);
+			} 
 			return i;
 		}
 		else {

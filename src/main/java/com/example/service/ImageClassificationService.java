@@ -18,7 +18,18 @@ public class ImageClassificationService {
 			e.printStackTrace();
 		}
 		
-		if(descScore != null && descScore.containsKey("snow")) return true;
-		else return false;
+		if(descScore != null && descScore.containsKey("snow")) {
+			if(Long.parseLong(descScore.get("snow")) >= 0.6) {
+				System.out.println("Snow found");
+				return true;
+			}
+			System.out.println("Snow found but low confidence");
+			
+		}
+		
+		
+			System.out.println("Snow not found!");
+			return false;
+		
 	}
 }

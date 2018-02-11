@@ -14,14 +14,19 @@ public class Issue {
 	long truckAssigned;
 	String lat;
 	String lng;
-	
-	public Issue(long creator, long truckAssigned, String lat, String lng) {
+	String type; // snow, garbage
+	public Issue( long creator, long truckAssigned, String lat, String lng, String type) {
 		super();
+		
 		this.creator = creator;
 		this.truckAssigned = truckAssigned;
 		this.lat = lat;
 		this.lng = lng;
-		
+		this.type = type;
+	}
+	public Issue() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 	public long getId() {
 		return id;
@@ -53,7 +58,12 @@ public class Issue {
 	public void setLng(String lng) {
 		this.lng = lng;
 	}
-	
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
 	
 	
 }
