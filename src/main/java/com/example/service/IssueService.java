@@ -60,11 +60,13 @@ public class IssueService {
 		issue.setTruckAssigned((long)trucks.get(truckId).getId());
 		TruckDevice td = trucks.get(truckId);
 		td.setBusy(true);
-		truckRepo.save(td);
+		td=truckRepo.save(td);
 		System.out.println("before notification");
+		System.out.println(td.getFcmtoken() + String.valueOf(issueId));
 		notification.send(td.getFcmtoken(), String.valueOf(issueId));
 		//NotificationService.send(td.getFcmtoken(), issueId + "");
-		return issueRepo.save(issue);
+		issue = issueRepo.save(issue);
+		return issue;
 		
 		
 	}
