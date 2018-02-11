@@ -12,6 +12,7 @@ public class RegistrationService {
 	@Autowired
 	PersonalDeviceRepository personalRepo;
 	
+	
 	public PersonalDevice registerDevice(String fcmtoken) {
 		PersonalDevice pd = new PersonalDevice(fcmtoken);
 		return personalRepo.save(pd);

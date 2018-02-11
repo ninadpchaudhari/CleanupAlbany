@@ -44,7 +44,7 @@ public class IssueService {
 	
 	public Issue assignTruck(long issueId) {
 		Issue issue = issueRepo.findById(issueId);
-		List<TruckDevice> trucks = truckRepo.findByType(issue.getType());
+		List<TruckDevice> trucks = truckRepo.findByTypeAndBusy(issue.getType(),false);
 		LatLng[] origins = new LatLng[trucks.size()];
 		for(int i=0;i<trucks.size();i++) {
 			origins[i] = new LatLng(Double.parseDouble(trucks.get(i).getLat()),Double.parseDouble(trucks.get(i).getLng()));
@@ -53,6 +53,10 @@ public class IssueService {
 		LatLng destination = new LatLng(Double.parseDouble(issue.getLat()),Double.parseDouble(issue.getLng()));
 		int truckId = GoogleDistanceApi.getTruckOverMinDistance(origins, destination);
 		issue.setTruckAssigned((long)trucks.get(truckId).getId());
+		TruckDevice td = trucks.get(truckId);
+		td.setBusy(true);
+		truckRepo.save(td);
+		NotificationService.send(td.getFcmtoken(), issueId + "");
 		return issueRepo.save(issue);
 		
 		

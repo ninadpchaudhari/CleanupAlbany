@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.models.PersonalDevice;
 import com.example.models.Student;
+import com.example.models.TruckDevice;
+import com.example.repos.TruckDeviceRepository;
 import com.example.service.RegistrationService;
 import com.example.service.StudentService;
 
@@ -31,6 +33,9 @@ public class RegistrationController {
 	@Autowired
 	RegistrationService regService;
 
+	@Autowired
+	TruckDeviceRepository truckRepo;
+	
 	@PostMapping(value="/registerPersonDevice")
 	@ResponseBody
 	public PersonalDevice updateRestaurantProfile(@RequestParam Map<String, Object> model, ModelMap otherModel){
@@ -39,6 +44,21 @@ public class RegistrationController {
 		PersonalDevice pd = regService.registerDevice(fcmtoken);
 		System.out.println("registered device ");
 		return pd;
+	}
+	@PostMapping(value="/registerTruckDevice")
+	@ResponseBody
+	public TruckDevice registerTruck(@RequestParam Map<String, Object> model, ModelMap otherModel){
+		System.out.println("Got a hit on register truck device");
+		String fcmtoken  = (String) model.get("fcmtoken");
+		long id  = Long.parseLong((String) model.get("id"));
+		
+		TruckDevice tf = truckRepo.findById(id);
+		if(tf!=null) {
+			tf.setFcmtoken(fcmtoken);
+		}
+		truckRepo.save(tf);
+		System.out.println("registered device ");
+		return tf;
 	}
 	
 	/*

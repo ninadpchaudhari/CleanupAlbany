@@ -59,6 +59,9 @@ public class IssueController {
 		NotificationService.send(pd.getFcmtoken(), "25");
 		return "lol";
 	}
+	/*
+	 * 
+	 
 	@PostMapping(value="/issueTest")
 	@ResponseBody
 	public Issue uploadTestIssue(
@@ -72,4 +75,5 @@ public class IssueController {
 		Issue i = issueService.saveIssue(pd.getId(), "nah", "nah", image);
 		return i;
 	}
+	*/
 }

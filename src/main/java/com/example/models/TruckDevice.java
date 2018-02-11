@@ -15,13 +15,25 @@ public class TruckDevice {
 	String type;
 	String lat;
 	String lng;
+	String fcmtoken;
+	boolean busy;
 	
+	public TruckDevice( long vehicleId,String type, String lat, String lng,String fcmtoken,boolean busy) {
+		super();
+		this.vehicleId = vehicleId;
+		this.type = type;
+		this.lat = lat;
+		this.lng = lng;
+		this.fcmtoken = fcmtoken;
+		this.busy = busy;
+	}
 	public TruckDevice( long vehicleId,String type, String lat, String lng) {
 		super();
 		this.vehicleId = vehicleId;
 		this.type = type;
 		this.lat = lat;
 		this.lng = lng;
+		
 	}
 	public TruckDevice() {
 		super();
@@ -56,6 +68,18 @@ public class TruckDevice {
 	}
 	public void setVehicleId(long vehicleId) {
 		this.vehicleId = vehicleId;
+	}
+	public String getFcmtoken() {
+		return fcmtoken;
+	}
+	public void setFcmtoken(String fcmtoken) {
+		this.fcmtoken = fcmtoken;
+	}
+	public boolean isBusy() {
+		return busy;
+	}
+	public void setBusy(boolean busy) {
+		this.busy = busy;
 	}
 	
 }
