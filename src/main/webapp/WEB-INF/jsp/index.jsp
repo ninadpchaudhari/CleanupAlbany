@@ -11,8 +11,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<!--------------------css files------------------------------->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" >
+<!--------------------css files-----	-------------------------->
+<link rel="stylesheet" href=" " >
 
 <!--------------------css files------------------------------->
 </head>
